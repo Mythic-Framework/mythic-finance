@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
-import { AppBar, Toolbar, IconButton, Divider, Grid } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Divider } from '@material-ui/core';
 import { NavLink, Link } from 'react-router-dom';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Fleeca from '../../assets/img/fleeca.png';
@@ -15,94 +14,93 @@ import Nui from '../../util/Nui';
 import { CurrencyFormat } from '../../util/Parser';
 
 const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-		background: theme.palette.secondary.dark,
+	navbar: {
+		backgroundColor: theme.palette.secondary.dark,
 		width: '100%',
-		height: 86,
-		zIndex: 100,
-	},
-	bankLogoLink: {
-		background: theme.palette.secondary.main,
-		'&:hover': {
-			background: theme.palette.secondary.light,
-			transition: 'background ease-in 0.15s',
-		},
-	},
-	bankLogo: {
-		width: '100%',
-		maxWidth: 298,
-		padding: 4,
+		borderBottom: `1px solid ${theme.palette.primary.main}30`,
+		boxShadow: `0 1px 0 ${theme.palette.primary.main}20`,
 	},
 	tb: {
-		minHeight: 125,
+		minHeight: 64,
+		padding: '0 16px',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'space-between',
 		position: 'relative',
 	},
-	navLinks: {
-		display: 'inline-flex',
+	left: {
+		display: 'flex',
 		alignItems: 'center',
-		width: '100%',
-		height: 'fit-content',
-		top: 0,
-		bottom: 0,
-		margin: 'auto',
-	},
-	navbar: {
-		backgroundColor: theme.palette.secondary.main,
-		width: '100%',
-		borderBottom: `1px solid ${theme.palette.border.divider}`,
-	},
-	right: {
-		display: 'inline-flex',
-		alignItems: 'center',
-		marginRight: 10,
+		justifyContent: 'center',
+		gap: 0,
 		position: 'absolute',
-		right: 0,
+		left: '50%',
+		transform: 'translateX(-50%)',
 	},
-	user: {
-		textAlign: 'right',
-		fontSize: 18,
-		fontWeight: 'regular',
-		'& small': {
-			'&::before': {
-				content: '", "',
-				color: theme.palette.text.alt,
-			},
-			color: theme.palette.primary.main,
-			marginRight: 10,
-
-			'& b': {
-				color: theme.palette.text.main,
-			},
-		},
-	},
-	money: {
-		display: 'block',
-		fontSize: 14,
-		marginRight: 10,
-		color: theme.palette.success.main,
-		'&::before': {
-			content: '"Cash:"',
-			marginRight: 5,
-			color: theme.palette.text.alt,
-		},
-	},
-	navLinkContainer: {
-		display: 'inline-flex',
+	bankLogoLink: {
+		display: 'flex',
 		alignItems: 'center',
+		paddingRight: 20,
+		marginRight: 4,
+		transition: 'opacity ease-in 0.15s',
+		'&:hover': { opacity: 0.8 },
+	},
+	bankLogo: {
+		height: 36,
+		width: 'auto',
+		objectFit: 'contain',
 	},
 	navLink: {
-		fontSize: 16,
+		fontSize: 13,
+		fontWeight: 500,
+		letterSpacing: '0.06em',
+		textTransform: 'uppercase',
 		color: theme.palette.text.alt,
 		transition: 'color ease-in 0.15s',
-		'&:hover': {
-			color: theme.palette.primary.dark,
-		},
+		padding: '4px 14px',
+		borderRadius: 4,
+		'&:hover': { color: theme.palette.primary.light },
 		'&.active': {
 			color: theme.palette.primary.main,
+			background: `${theme.palette.primary.main}15`,
 		},
-		'&:not(:last-of-type)': {
-			marginRight: 20,
+		'&:not(:last-of-type)': { marginRight: 4 },
+	},
+	right: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'flex-end',
+		gap: 12,
+		flex: 1,
+	},
+	userInfo: {
+		textAlign: 'right',
+	},
+	userName: {
+		fontSize: 14,
+		fontWeight: 600,
+		color: theme.palette.text.main,
+		letterSpacing: '0.02em',
+		'& span': { color: theme.palette.primary.main },
+	},
+	userCash: {
+		fontSize: 15,
+		fontWeight: 500,
+		color: theme.palette.success.main,
+		'&::before': {
+			content: '"Cash\u00a0"',
+			color: theme.palette.text.alt,
+			fontWeight: 400,
+		},
+	},
+	closeBtn: {
+		color: theme.palette.text.alt,
+		width: 32,
+		height: 32,
+		transition: 'color ease-in 0.15s, background ease-in 0.15s',
+		'&:hover': {
+			color: '#ff5555',
+			background: 'rgba(255,85,85,0.1)',
 		},
 	},
 }));
@@ -115,91 +113,66 @@ export default () => {
 
 	const getBranding = () => {
 		switch (brand) {
-			case 'fleeca':
-				return Fleeca;
-			case 'maze':
-				return Maze;
-			case 'blaineco':
-				return BlaineCo;
-			case 'ud':
-				return UnionDepo;
-			default:
-				return Fleeca;
+			case 'fleeca': return Fleeca;
+			case 'maze': return Maze;
+			case 'blaineco': return BlaineCo;
+			case 'ud': return UnionDepo;
+			default: return Fleeca;
 		}
-	};
-
-	const onClose = () => {
-		Nui.send('Close');
 	};
 
 	const getNavLinks = () => {
 		switch (app) {
 			case 'BANK':
 				return [
-					{
-						link: '/',
-						label: 'My Accounts',
-						isExact: true,
-					},
-					// {
-					// 	link: '/loans',
-					// 	label: 'My Loans',
-					// 	isExact: false,
-					// },
-					// {
-					// 	link: '/credit',
-					// 	label: 'My Credit',
-					// 	isExact: true,
-					// },
+					{ link: '/', label: 'My Accounts', isExact: true },
+					// { link: '/loans', label: 'My Loans', isExact: false },
+					// { link: '/credit', label: 'My Credit', isExact: true },
 				];
 			case 'ATM':
+				return [];
+			default:
 				return [];
 		}
 	};
 
 	return (
-		<AppBar
-			elevation={0}
-			position="relative"
-			color="secondary"
-			className={classes.navbar}
-		>
+		<AppBar elevation={0} position="relative" className={classes.navbar}>
 			<Toolbar className={classes.tb} disableGutters>
-				<div className={classes.navLinks}>
+				{/* Spacer to balance the right side so justify-content: space-between keeps right anchored */}
+				<div style={{ flex: 1 }} />
+				<div className={classes.left}>
 					<Link to="/" className={classes.bankLogoLink}>
 						<img src={getBranding()} className={classes.bankLogo} />
 					</Link>
 					{getNavLinks().length > 0 && (
 						<>
-							<Divider orientation="vertical" flexItem />
-							<div style={{ marginLeft: 20, lineHeight: '20px' }}>
-								{getNavLinks().map((link, k) => {
-									return (
-										<NavLink
-											key={`link-${k}`}
-											className={classes.navLink}
-											to={link.link}
-											exact={link.isExact}
-										>
-											{link.label}
-										</NavLink>
-									);
-								})}
-							</div>
+							<Divider orientation="vertical" flexItem style={{ margin: '12px 16px 12px 0' }} />
+							{getNavLinks().map((link, k) => (
+								<NavLink
+									key={`link-${k}`}
+									className={classes.navLink}
+									to={link.link}
+									exact={link.isExact}
+								>
+									{link.label}
+								</NavLink>
+							))}
 						</>
 					)}
 				</div>
 				<div className={classes.right}>
-					<div className={classes.user}>
-						Welcome
-						<small>{`${user.First} ${user.Last}`}</small>
-						<span className={classes.money}>
+					<div className={classes.userInfo}>
+						<div className={classes.userName}>
+							{user.First} <span>{user.Last}</span>
+						</div>
+						<div className={classes.userCash}>
 							{CurrencyFormat.format(user.Cash)}
-						</span>
+						</div>
 					</div>
-					<Divider orientation="vertical" flexItem />
-					<IconButton onClick={onClose}>
-						<FontAwesomeIcon icon={['fas', 'xmark']} />
+					<Divider orientation="vertical" flexItem style={{ margin: '12px 4px' }} />
+					<IconButton className={classes.closeBtn} onClick={() => Nui.send('Close')} size="small">
+						<FontAwesomeIcon icon={['fas', 'xmark']} size="sm" />
 					</IconButton>
 				</div>
 			</Toolbar>

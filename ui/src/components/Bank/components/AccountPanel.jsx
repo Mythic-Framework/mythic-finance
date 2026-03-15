@@ -29,43 +29,172 @@ const useStyles = makeStyles((theme) => ({
 		padding: 16,
 		maxHeight: '100%',
 	},
-	block: {
-		height: '100%',
-		padding: 25,
-		background: theme.palette.secondary.main,
-		border: `1px solid ${theme.palette.border.divider}`,
+	card: {
+		padding: '18px 20px',
+		background: theme.palette.secondary.dark,
+		border: `1px solid ${theme.palette.primary.main}18`,
+		borderRadius: 6,
 		color: theme.palette.text.main,
-		fontWeight: 'normal',
-		fontSize: 16,
+		height: '100%',
+		boxSizing: 'border-box',
 	},
-	blockHeader: {
-		fontSize: 14,
-		marginBottom: 10,
+	cardLabel: {
+		fontSize: 10,
+		letterSpacing: '0.1em',
+		textTransform: 'uppercase',
 		color: theme.palette.text.alt,
+		marginBottom: 4,
+		opacity: 0.7,
 		'& small': {
 			color: theme.palette.primary.main,
+			marginLeft: 6,
 			fontSize: 10,
+			opacity: 1,
 		},
 	},
-	blockContent: {
-		fontSize: 18,
-		marginLeft: 20,
-		height: 'fit-content',
-		overflowY: 'auto',
-		overflowX: 'hidden',
-		'&:not(:last-of-type)': {
-			marginBottom: 10,
+	transactionsHeader: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		marginBottom: 12,
+		paddingBottom: 10,
+		borderBottom: `1px solid ${theme.palette.primary.main}25`,
+	},
+	transactionsTitle: {
+		fontSize: 14,
+		letterSpacing: '0.08em',
+		textTransform: 'uppercase',
+		fontWeight: 700,
+		color: theme.palette.text.main,
+	},
+	transactionsCount: {
+		fontSize: 12,
+		color: theme.palette.primary.main,
+		fontWeight: 500,
+		letterSpacing: '0.04em',
+	},
+	quickActionsLabel: {
+		fontSize: 14,
+		letterSpacing: '0.08em',
+		textTransform: 'uppercase',
+		fontWeight: 700,
+		color: theme.palette.text.main,
+		marginBottom: 14,
+		paddingBottom: 10,
+		borderBottom: `1px solid ${theme.palette.primary.main}25`,
+	},
+	actionTile: {
+		width: '100%',
+		display: 'flex',
+		alignItems: 'center',
+		gap: 14,
+		padding: '14px 16px',
+		borderRadius: 6,
+		border: '1px solid transparent',
+		cursor: 'pointer',
+		transition: 'all ease-in 0.15s',
+		background: 'none',
+		'&:not(:last-of-type)': { marginBottom: 10 },
+		'&:disabled': { opacity: 0.35, cursor: 'not-allowed' },
+	},
+	actionTileDeposit: {
+		borderColor: `${theme.palette.success.main}40`,
+		background: `${theme.palette.success.dark}30`,
+		'&:hover:not(:disabled)': {
+			background: `${theme.palette.success.dark}60`,
+			borderColor: `${theme.palette.success.main}80`,
+			transform: 'translateY(-1px)',
+			boxShadow: `0 4px 12px ${theme.palette.success.dark}60`,
 		},
 	},
-	money: {
+	actionTileWithdraw: {
+		borderColor: `${theme.palette.warning.main}40`,
+		background: `${theme.palette.warning.dark}25`,
+		'&:hover:not(:disabled)': {
+			background: `${theme.palette.warning.dark}50`,
+			borderColor: `${theme.palette.warning.main}80`,
+			transform: 'translateY(-1px)',
+			boxShadow: `0 4px 12px ${theme.palette.warning.dark}60`,
+		},
+	},
+	actionTileTransfer: {
+		borderColor: `${theme.palette.primary.main}40`,
+		background: `${theme.palette.primary.dark}25`,
+		'&:hover:not(:disabled)': {
+			background: `${theme.palette.primary.dark}50`,
+			borderColor: `${theme.palette.primary.main}80`,
+			transform: 'translateY(-1px)',
+			boxShadow: `0 4px 12px ${theme.palette.primary.dark}60`,
+		},
+	},
+	actionTileIcon: {
+		width: 38,
+		height: 38,
+		minWidth: 38,
+		borderRadius: 8,
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		fontSize: 16,
+	},
+	actionTileIconDeposit: {
+		background: `${theme.palette.success.main}25`,
 		color: theme.palette.success.main,
 	},
-	quickBtn: {
+	actionTileIconWithdraw: {
+		background: `${theme.palette.warning.main}25`,
+		color: theme.palette.warning.main,
+	},
+	actionTileIconTransfer: {
+		background: `${theme.palette.primary.main}25`,
+		color: theme.palette.primary.main,
+	},
+	actionTileText: {
+		textAlign: 'left',
+	},
+	actionTileTitle: {
+		fontSize: 14,
+		fontWeight: 600,
+		letterSpacing: '0.02em',
+		color: theme.palette.text.main,
+		lineHeight: 1.2,
+	},
+	actionTileSubtitle: {
+		fontSize: 11,
+		color: theme.palette.text.alt,
+		marginTop: 2,
+		opacity: 0.7,
+	},
+	cardValue: {
+		fontSize: 15,
+		fontWeight: 500,
+		color: theme.palette.text.main,
+		marginBottom: 14,
+		'&:last-child': { marginBottom: 0 },
+	},
+	balance: {
+		fontSize: 22,
+		fontWeight: 700,
+		color: theme.palette.primary.main,
+		letterSpacing: '-0.02em',
+	},
+	sectionTitle: {
+		fontSize: 10,
+		letterSpacing: '0.1em',
+		textTransform: 'uppercase',
+		color: theme.palette.text.alt,
+		marginBottom: 10,
+		opacity: 0.7,
+	},
+	actionBtn: {
 		display: 'block',
-		padding: 10,
-		'&:not(:last-of-type)': {
-			marginBottom: 10,
-		},
+		width: '100%',
+		padding: '9px 14px',
+		fontSize: 12,
+		fontWeight: 600,
+		letterSpacing: '0.05em',
+		textTransform: 'uppercase',
+		'&:not(:last-of-type)': { marginBottom: 8 },
 	},
 	field: {
 		marginBottom: 15,
@@ -566,210 +695,154 @@ export default () => {
 		<>
 			{Boolean(account) ? (
 				<Grid className={classes.container} container spacing={2}>
+					{/* Account Info Card */}
 					<Grid item xs={6}>
-						<div className={classes.block}>
-							<Grid container>
-								<Grid item xs={6}>
-									<div className={classes.blockHeader}>
-										Account Number
-									</div>
-									<div className={classes.blockContent}>
-										{account.Account}
-									</div>
-									<div className={classes.blockHeader}>
-										Account Type
-									</div>
-									<div className={classes.blockContent}>
-										{getAccountType(account)}
-									</div>
-									<div className={classes.blockHeader}>
-										Available Balance
-									</div>
-									<div className={classes.blockContent}>
-										{account?.Permissions?.BALANCE ? (
-											<span className={classes.money}>
-												{CurrencyFormat.format(
-													account.Balance,
-												)}
-											</span>
-										) : (
-											<span>???</span>
-										)}
-									</div>
-								</Grid>
-								<Grid item xs={6}>
-									<div className={classes.blockHeader}>
-										Account Management
-									</div>
-									{account.Type != 'organization' && (
+						<div className={classes.card}>
+							<div className={classes.cardLabel}>Account Number</div>
+							<div className={classes.cardValue}>{account.Account}</div>
+
+							<div className={classes.cardLabel}>Account Type</div>
+							<div className={classes.cardValue}>{getAccountType(account)}</div>
+
+							<div className={classes.cardLabel}>Available Balance</div>
+							<div className={classes.cardValue}>
+								{account?.Permissions?.BALANCE ? (
+									<span className={classes.balance}>
+										{CurrencyFormat.format(account.Balance)}
+									</span>
+								) : (
+									<span style={{ opacity: 0.4 }}>Hidden</span>
+								)}
+							</div>
+
+							{(account.Type !== 'organization' || (account.Type === 'personal_savings' && account.Owner === user.SID)) && (
+								<>
+									<div className={classes.cardLabel} style={{ marginTop: 14 }}>Management</div>
+									{account.Type !== 'organization' && (
 										<Button
 											fullWidth
-											color="success"
-											variant="contained"
-											disabled={
-												loading ||
-												!account?.Permissions?.WITHDRAW
-											}
-											className={classes.quickBtn}
+											color="primary"
+											variant="outlined"
+											disabled={loading || !account?.Permissions?.WITHDRAW}
+											className={classes.actionBtn}
 											onClick={() => setRenaming(true)}
 										>
-											Change Account Nickname
+											<FontAwesomeIcon icon={['fas', 'pen']} style={{ marginRight: 8 }} />
+											Rename Account
 										</Button>
 									)}
-									{account.Type == 'personal_savings' &&
-										account.Owner == user.SID && (
-											<Button
-												fullWidth
-												color="info"
-												variant="contained"
-												disabled={
-													loading ||
-													!account?.Permissions
-														?.WITHDRAW
-												}
-												className={classes.quickBtn}
-												onClick={() =>
-													setViewingOwners(true)
-												}
-											>
-												Manage Joint Owners
-											</Button>
-										)}
-								</Grid>
-							</Grid>
-						</div>
-					</Grid>
-					<Grid item xs={6}>
-						<div className={classes.block}>
-							<div className={classes.blockHeader}>
-								Account Quick Actions
-							</div>
-							<div className={classes.blockContent}>
-								<Button
-									fullWidth
-									color="success"
-									variant="contained"
-									className={classes.quickBtn}
-									disabled={
-										!account?.Permissions?.DEPOSIT &&
-										user.Cash == 0
-									}
-									onClick={() => setDepositing(true)}
-								>
-									Deposit Cash
-								</Button>
-								<Button
-									fullWidth
-									color="warning"
-									variant="contained"
-									className={classes.quickBtn}
-									disabled={
-										!account?.Permissions?.WITHDRAW ||
-										account.Balance == 0
-									}
-									onClick={() => setWithdrawing(true)}
-								>
-									Withdraw Cash
-								</Button>
-								<Button
-									fullWidth
-									color="info"
-									variant="contained"
-									className={classes.quickBtn}
-									disabled={
-										!account?.Permissions?.WITHDRAW ||
-										account.Balance == 0
-									}
-									onClick={() => setTransferring(true)}
-								>
-									Transfer Funds
-								</Button>
-							</div>
-						</div>
-					</Grid>
-					{account?.Permissions?.TRANSACTIONS ? (
-						<Grid
-							item
-							xs={12}
-							style={{ width: '98%', margin: 'auto' }}
-						>
-							<div className={classes.block}>
-								<div className={classes.blockHeader}>
-									Recent Transactions{' '}
-									<small>({accTrans.length} Total)</small>
-								</div>
-								<List
-									className={classes.blockContent}
-									style={{ paddingRight: 10, height: 395 }}
-								>
-									{Boolean(accTrans) &&
-									accTrans.length > 0 ? (
-										accTrans
-											.sort(
-												(a, b) =>
-													b.Timestamp - a.Timestamp,
-											)
-											.slice(0, page * 10)
-											.map((t, k) => {
-												return (
-													<Transaction
-														key={`${account._id}-${k}`}
-														transaction={t}
-													/>
-												);
-											})
-									) : (
-										<ListItem
-											style={{ textAlign: 'center' }}
+									{account.Type === 'personal_savings' && account.Owner === user.SID && (
+										<Button
+											fullWidth
+											color="info"
+											variant="outlined"
+											disabled={loading || !account?.Permissions?.WITHDRAW}
+											className={classes.actionBtn}
+											style={{ marginTop: 8 }}
+											onClick={() => setViewingOwners(true)}
 										>
-											No Recent Transactions
-										</ListItem>
+											<FontAwesomeIcon icon={['fas', 'users']} style={{ marginRight: 8 }} />
+											Joint Owners
+										</Button>
 									)}
-									{Boolean(accTrans) &&
-										accTrans.length > 10 &&
-										page <
-											Math.ceil(accTrans.length / 10) && (
-											<Button
-												fullWidth
-												color="success"
-												variant="contained"
-												style={{ marginTop: 10 }}
-												onClick={() =>
-													setPage(page + 1)
-												}
-											>
-												Load More
-											</Button>
-										)}
-								</List>
-							</div>
-						</Grid>
-					) : (
-						<Grid
-							item
-							xs={12}
-							style={{ width: '98%', margin: 'auto' }}
-						>
-							<div className={classes.block}>
-								<div className={classes.blockHeader}>
-									Recent Transactions <small>(0 Total)</small>
+								</>
+							)}
+						</div>
+					</Grid>
+
+					{/* Quick Actions Card */}
+					<Grid item xs={6}>
+						<div className={classes.card}>
+							<div className={classes.quickActionsLabel}>Quick Actions</div>
+
+							{/* Deposit */}
+							<button
+								className={`${classes.actionTile} ${classes.actionTileDeposit}`}
+								disabled={!account?.Permissions?.DEPOSIT || user.Cash === 0}
+								onClick={() => setDepositing(true)}
+							>
+								<div className={`${classes.actionTileIcon} ${classes.actionTileIconDeposit}`}>
+									<FontAwesomeIcon icon={['fas', 'circle-arrow-down']} />
 								</div>
-								<List
-									className={classes.blockContent}
-									style={{ paddingRight: 10 }}
-								>
-									<ListItem style={{ textAlign: 'center' }}>
+								<div className={classes.actionTileText}>
+									<div className={classes.actionTileTitle}>Deposit Cash</div>
+									<div className={classes.actionTileSubtitle}>Add funds to this account</div>
+								</div>
+							</button>
+
+							{/* Withdraw */}
+							<button
+								className={`${classes.actionTile} ${classes.actionTileWithdraw}`}
+								disabled={!account?.Permissions?.WITHDRAW || account.Balance === 0}
+								onClick={() => setWithdrawing(true)}
+							>
+								<div className={`${classes.actionTileIcon} ${classes.actionTileIconWithdraw}`}>
+									<FontAwesomeIcon icon={['fas', 'circle-arrow-up']} />
+								</div>
+								<div className={classes.actionTileText}>
+									<div className={classes.actionTileTitle}>Withdraw Cash</div>
+									<div className={classes.actionTileSubtitle}>Take funds as cash</div>
+								</div>
+							</button>
+
+							{/* Transfer */}
+							<button
+								className={`${classes.actionTile} ${classes.actionTileTransfer}`}
+								disabled={!account?.Permissions?.WITHDRAW || account.Balance === 0}
+								onClick={() => setTransferring(true)}
+							>
+								<div className={`${classes.actionTileIcon} ${classes.actionTileIconTransfer}`}>
+									<FontAwesomeIcon icon={['fas', 'right-left']} />
+								</div>
+								<div className={classes.actionTileText}>
+									<div className={classes.actionTileTitle}>Transfer Funds</div>
+									<div className={classes.actionTileSubtitle}>Send to another account</div>
+								</div>
+							</button>
+						</div>
+					</Grid>
+
+					{/* Transactions Card */}
+					<Grid item xs={12}>
+						<div className={classes.card}>
+							<div className={classes.transactionsHeader}>
+								<div className={classes.transactionsTitle}>Recent Transactions</div>
+								{account?.Permissions?.TRANSACTIONS && (
+									<div className={classes.transactionsCount}>{accTrans.length} transactions</div>
+								)}
+							</div>
+							<List style={{ paddingRight: 10, maxHeight: 380, overflowY: 'auto' }}>
+								{account?.Permissions?.TRANSACTIONS && accTrans.length > 0 ? (
+									accTrans
+										.sort((a, b) => b.Timestamp - a.Timestamp)
+										.slice(0, page * 10)
+										.map((t, k) => (
+											<Transaction key={`${account._id}-${k}`} transaction={t} />
+										))
+								) : (
+									<ListItem style={{ justifyContent: 'center', opacity: 0.4, fontSize: 15 }}>
 										No Recent Transactions
 									</ListItem>
-								</List>
-							</div>
-						</Grid>
-					)}
+								)}
+								{accTrans.length > 10 && page < Math.ceil(accTrans.length / 10) && (
+									<Button
+										fullWidth
+										color="primary"
+										variant="outlined"
+										style={{ marginTop: 10, fontSize: 13 }}
+										onClick={() => setPage(page + 1)}
+									>
+										Load More
+									</Button>
+								)}
+							</List>
+						</div>
+					</Grid>
 				</Grid>
 			) : (
-				<div className={classes.accountPanel} style={{ padding: 20 }}>
-					<Alert variant="filled" severity="error">
-						Please Select An Account
+				<div style={{ padding: 20 }}>
+					<Alert variant="outlined" severity="info" style={{ borderColor: 'rgba(0,201,177,0.3)', color: 'rgba(255,255,255,0.5)' }}>
+						Select an account from the sidebar to get started.
 					</Alert>
 				</div>
 			)}
@@ -788,14 +861,15 @@ export default () => {
 							>
 								{loading && <Loader static text="Loading" />}
 								<TextField
-									fullWidth
-									required
-									className={classes.input}
-									label="Account Nickname"
-									defaultValue={account.Name}
-									name="name"
-									variant="outlined"
-								/>
+								fullWidth
+								required
+								className={classes.input}
+								label="Account Nickname"
+								defaultValue={account.Name}
+								name="name"
+								variant="outlined"
+								 autoComplete="off"
+											/>
 							</Modal>
 						)}
 					{account?.Permissions?.DEPOSIT && (
@@ -809,37 +883,40 @@ export default () => {
 						>
 							{loading && <Loader static text="Loading" />}
 							<NumberFormat
-								fullWidth
-								required
-								label="Deposit To"
-								className={classes.field}
-								disabled={true}
-								type="tel"
-								isNumericString
-								value={account.Account}
-								customInput={TextField}
+							fullWidth
+							required
+							label="Deposit To"
+							className={classes.field}
+							disabled={true}
+							type="tel"
+							isNumericString
+							value={account.Account}
+							customInput={TextField}
+							 inputProps={{ autoComplete: 'off' }}
 							/>
 							<NumberFormat
-								fullWidth
-								required
-								label="Amount"
-								name="amount"
-								className={classes.field}
-								disabled={loading}
-								type="tel"
-								isNumericString
-								customInput={TextField}
+							fullWidth
+							required
+							label="Amount"
+							name="amount"
+							className={classes.field}
+							disabled={loading}
+							type="tel"
+							isNumericString
+							 customInput={TextField}
+							 inputProps={{ autoComplete: 'off' }}
 							/>
 							<TextField
-								fullWidth
-								multiline
-								minRows={3}
-								className={classes.input}
-								disabled={loading}
-								label="Transaction Comment"
-								name="notes"
-								variant="outlined"
-							/>
+							fullWidth
+							multiline
+							minRows={3}
+							className={classes.input}
+							disabled={loading}
+							label="Transaction Comment"
+							 name="notes"
+										variant="outlined"
+										autoComplete="off"
+									/>
 						</Modal>
 					)}
 					{account?.Permissions?.WITHDRAW && (
@@ -853,37 +930,40 @@ export default () => {
 						>
 							{loading && <Loader static text="Loading" />}
 							<NumberFormat
-								fullWidth
-								required
-								label="Withdraw From"
-								className={classes.field}
-								disabled={true}
-								type="tel"
-								isNumericString
-								value={account.Account}
-								customInput={TextField}
+							fullWidth
+							required
+							label="Withdraw From"
+							className={classes.field}
+							disabled={true}
+							type="tel"
+							isNumericString
+							value={account.Account}
+							customInput={TextField}
+							 inputProps={{ autoComplete: 'off' }}
 							/>
 							<NumberFormat
-								fullWidth
-								required
-								label="Amount"
-								name="amount"
-								className={classes.field}
-								disabled={loading}
-								type="tel"
-								isNumericString
-								customInput={TextField}
+							fullWidth
+							required
+							label="Amount"
+							name="amount"
+							className={classes.field}
+							disabled={loading}
+							type="tel"
+							isNumericString
+							 customInput={TextField}
+							 inputProps={{ autoComplete: 'off' }}
 							/>
 							<TextField
-								fullWidth
-								multiline
-								minRows={3}
-								className={classes.input}
-								disabled={loading}
-								label="Transaction Comment"
-								name="notes"
-								variant="outlined"
-							/>
+							fullWidth
+							multiline
+							minRows={3}
+							className={classes.input}
+							disabled={loading}
+							label="Transaction Comment"
+							 name="notes"
+										variant="outlined"
+										autoComplete="off"
+									/>
 						</Modal>
 					)}
 					{account?.Permissions?.WITHDRAW && (
@@ -897,67 +977,72 @@ export default () => {
 						>
 							{loading && <Loader static text="Loading" />}
 							<NumberFormat
-								fullWidth
-								required
-								label="Transfer From"
-								className={classes.field}
-								disabled={true}
-								type="tel"
-								isNumericString
-								value={account.Account}
-								customInput={TextField}
+							fullWidth
+							required
+							label="Transfer From"
+							className={classes.field}
+							disabled={true}
+							type="tel"
+							isNumericString
+							value={account.Account}
+							customInput={TextField}
+							 inputProps={{ autoComplete: 'off' }}
 							/>
 							<TextField
-								select
-								fullWidth
-								required
-								name="type"
-								className={classes.field}
-								label="Transfer Type"
-								onChange={(e) => setXferType(e.target.value)}
-								value={xferType}
+							select
+							fullWidth
+							required
+							name="type"
+							className={classes.field}
+							label="Transfer Type"
+							onChange={(e) => setXferType(e.target.value)}
+							 value={xferType}
+							autoComplete="off"
 							>
-								{Types.map((option) => (
-									<MenuItem
-										key={option.value}
-										value={option.value}
-									>
-										{option.label}
-									</MenuItem>
-								))}
+							{Types.map((option) => (
+							<MenuItem
+							 key={option.value}
+							value={option.value}
+							>
+							  {option.label}
+							  </MenuItem>
+							 ))}
 							</TextField>
 							<NumberFormat
-								fullWidth
-								required
-								label={xferType ? 'State ID' : 'Account Number'}
-								name="target"
-								className={classes.field}
-								disabled={loading}
-								type="tel"
-								isNumericString
-								customInput={TextField}
+							fullWidth
+							required
+							label={xferType ? 'State ID' : 'Account Number'}
+							name="target"
+							className={classes.field}
+							disabled={loading}
+							type="tel"
+							 isNumericString
+							 customInput={TextField}
+							inputProps={{ autoComplete: 'off' }}
 							/>
 							<NumberFormat
-								fullWidth
-								required
-								label="Amount"
-								name="amount"
-								className={classes.field}
-								disabled={loading}
-								type="tel"
-								isNumericString
-								customInput={TextField}
+							fullWidth
+							required
+							label="Amount"
+							name="amount"
+							className={classes.field}
+							disabled={loading}
+							 type="tel"
+							 isNumericString
+							customInput={TextField}
+							inputProps={{ autoComplete: 'off' }}
 							/>
 							<TextField
-								fullWidth
-								multiline
-								minRows={3}
-								className={classes.input}
-								disabled={loading}
-								label="Transaction Comment"
-								name="notes"
-								variant="outlined"
-							/>
+							fullWidth
+							multiline
+							minRows={3}
+							className={classes.input}
+							 disabled={loading}
+										label="Transaction Comment"
+										name="notes"
+										variant="outlined"
+										autoComplete="off"
+									/>
 						</Modal>
 					)}
 					{account?.Permissions?.MANAGE &&
@@ -1032,16 +1117,18 @@ export default () => {
 											<Loader static text="Loading" />
 										)}
 										<NumberFormat
-											fullWidth
-											required
-											label="State ID"
-											name="target"
-											className={classes.field}
-											disabled={loading}
-											type="tel"
-											isNumericString
-											customInput={TextField}
-										/>
+										fullWidth
+										required
+										label="State ID"
+										name="target"
+										className={classes.field}
+										disabled={loading}
+										type="tel"
+										isNumericString
+										customInput={TextField}
+										variant="outlined"
+										 inputProps={{ autoComplete: 'off' }}
+															/>
 									</Modal>
 								)}
 							</>

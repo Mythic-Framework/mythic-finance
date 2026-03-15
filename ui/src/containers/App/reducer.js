@@ -3,6 +3,7 @@ export const initialState = {
 	brand: null,
 	app: null,
 
+	// DEV PREVIEW - uncomment to test in browser, revert before building
 	// hidden: false,
 	// brand: 'fleeca',
 	// app: 'BANK',

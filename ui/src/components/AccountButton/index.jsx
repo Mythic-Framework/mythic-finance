@@ -9,31 +9,48 @@ import { CurrencyFormat } from '../../util/Parser';
 
 const useStyles = makeStyles((theme) => ({
 	btn: {
-		width: '95%',
-		fontSize: 18,
-		color: theme.palette.text.main,
-		borderTopLeftRadius: 0,
-		borderBottomLeftRadius: 0,
+		width: '100%',
+		fontSize: 15,
+		color: theme.palette.text.alt,
+		borderRadius: 0,
 		display: 'block',
-		marginBottom: '5%',
+		textAlign: 'left',
+		padding: '11px 14px',
+		borderLeft: '3px solid transparent',
+		transition: 'all ease-in 0.15s',
+		'&:hover': {
+			background: `${theme.palette.primary.main}10`,
+			color: theme.palette.text.main,
+			borderLeftColor: `${theme.palette.primary.main}60`,
+		},
 		'&.selected': {
-			background: `${theme.palette.primary.dark}73`,
+			background: `${theme.palette.primary.main}18`,
+			color: theme.palette.text.main,
+			borderLeftColor: theme.palette.primary.main,
 		},
 		'& small': {
 			display: 'block',
-			fontSize: 12,
+			fontSize: 15,
+			marginTop: 3,
 			color: theme.palette.success.main,
 			'&::before': {
 				color: theme.palette.text.alt,
-				marginRight: 5,
-				content: '"Balance:"',
+				marginRight: 4,
+				content: '"Balance"',
+				fontSize: 13,
+				letterSpacing: '0.04em',
+				textTransform: 'uppercase',
 			},
 		},
 	},
-	btnIcon: {
-		fontSize: 16,
-		marginRight: 5,
-		color: theme.palette.text.alt,
+	acctName: {
+		width: '100%',
+		overflow: 'hidden',
+		whiteSpace: 'nowrap',
+		textOverflow: 'ellipsis',
+		fontWeight: 500,
+		fontSize: 15,
+		letterSpacing: '0.01em',
 	},
 }));
 
@@ -44,19 +61,16 @@ export default ({ account, onSelected }) => {
 	const isSelected = selected == account._id;
 
 	return (
-		<div>
-			<Button
-				className={`${classes.btn}${isSelected ? ' selected' : ''}`}
-				color="primary"
-				onClick={() => onSelected(isSelected ? null : account._id)}
-			>
-				<div style={{ width: '100%' }}>
-					<Truncate lines={1}>{account.Name}</Truncate>
-				</div>
-				{account?.Permissions?.BALANCE && (
-					<small>{CurrencyFormat.format(account.Balance)}</small>
-				)}
-			</Button>
-		</div>
+		<Button
+			className={`${classes.btn}${isSelected ? ' selected' : ''}`}
+			onClick={() => onSelected(isSelected ? null : account._id)}
+		>
+			<div className={classes.acctName}>
+				<Truncate lines={1}>{account.Name}</Truncate>
+			</div>
+			{account?.Permissions?.BALANCE && (
+				<small>{CurrencyFormat.format(account.Balance)}</small>
+			)}
+		</Button>
 	);
 };

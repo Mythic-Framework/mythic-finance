@@ -15,45 +15,71 @@ import { Modal } from '../../';
 import { CurrencyFormat } from '../../../util/Parser';
 
 const useStyles = makeStyles((theme) => ({
-	trans: {
-		background: theme.palette.info.main,
-		'&.transfer': {
-			background: theme.palette.warning.main,
+	row: {
+		padding: '4px 0',
+		borderBottom: `1px solid ${theme.palette.border.divider}`,
+		transition: 'background ease-in 0.1s',
+		'&:hover': {
+			background: `${theme.palette.primary.main}0a`,
+			cursor: 'pointer',
 		},
-		'&.withdraw': {
-			color: theme.palette.text.main,
-			background: theme.palette.error.main,
-		},
-		'&.deposit': {
-			background: theme.palette.success.main,
-		},
-		'&.fine': {
-			color: theme.palette.text.main,
-			background: theme.palette.error.main,
-		},
-		'&.fine_profit': {
-			background: theme.palette.success.main,
-		},
-		'&.bill': {
-			color: theme.palette.text.main,
-			background: theme.palette.error.main,
-		},
-		'&.paycheck': {
-			background: theme.palette.success.main,
-		},
+		'&:last-child': { borderBottom: 'none' },
 	},
-	money: {
+	trans: {
+		width: 40,
+		height: 40,
+		minWidth: 40,
+		borderRadius: 8,
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		fontSize: 16,
+		background: theme.palette.info.dark,
+		color: '#fff',
+		'&.transfer': { background: '#7c4d1a' },
+		'&.withdraw': { background: theme.palette.error.dark },
+		'&.deposit': { background: theme.palette.success.dark },
+		'&.fine': { background: theme.palette.error.dark },
+		'&.fine_profit': { background: theme.palette.success.dark },
+		'&.bill': { background: theme.palette.error.dark },
+		'&.paycheck': { background: theme.palette.success.dark },
+	},
+	amountPositive: {
 		color: theme.palette.success.main,
+		fontWeight: 700,
+		fontSize: 15,
+		fontFamily: 'Inter, Roboto, sans-serif',
+		letterSpacing: '0.01em',
+	},
+	amountNegative: {
+		color: theme.palette.error.light,
+		fontWeight: 700,
+		fontSize: 15,
+		fontFamily: 'Inter, Roboto, sans-serif',
+		letterSpacing: '0.01em',
+	},
+	primText: {
+		fontSize: 14,
+		fontWeight: 600,
+		fontFamily: 'Inter, Roboto, sans-serif',
+		color: theme.palette.text.main,
+		lineHeight: 1.4,
+		letterSpacing: '0.01em',
+	},
+	secText: {
+		fontSize: 12,
+		fontFamily: 'Inter, Roboto, sans-serif',
+		fontWeight: 400,
+		color: theme.palette.text.alt,
+		marginTop: 3,
+		letterSpacing: '0.02em',
+		opacity: 0.9,
 	},
 	type: {
-		textTransform: 'capitilize',
-	},
-	icon: {
-		height: 'fit-content',
-		position: 'absolute',
-		top: 0,
-		bottom: 0,
-		margin: 'auto',
+		textTransform: 'capitalize',
+		fontWeight: 500,
+		fontFamily: 'Inter, Roboto, sans-serif',
+		letterSpacing: '0.03em',
 	},
 }));
 
@@ -77,7 +103,7 @@ export default ({ transaction }) => {
 					<FontAwesomeIcon icon={['fas', 'hand-holding-dollar']} />
 				);
 			case 'bill':
-				return <FontAwesomeIcon icon={['fas', 'ballot-check']} />;
+				return <FontAwesomeIcon icon={['fas', 'file-invoice-dollar']} />;
 			case 'paycheck':
 				return <FontAwesomeIcon icon={['fas', 'money-check-dollar']} />;
 			default:
@@ -85,51 +111,30 @@ export default ({ transaction }) => {
 		}
 	};
 
+	const isNegative = ['withdraw', 'fine', 'bill'].includes(transaction.Type);
+
 	return (
 		<>
-			<ListItem button onClick={() => setViewing(true)}>
-				<Grid container>
-					<Grid item xs={1}>
-						<ListItemAvatar className={classes.icon}>
-							<Avatar
-								className={`${classes.trans} ${transaction.Type}`}
-							>
-								{getTransIcon()}
-							</Avatar>
-						</ListItemAvatar>
+			<ListItem className={classes.row} onClick={() => setViewing(true)} disablePadding>
+				<Grid container alignItems="center" style={{ padding: '8px 12px', gap: 0 }}>
+					<Grid item style={{ marginRight: 12 }}>
+						<div className={`${classes.trans} ${transaction.Type}`}>
+							{getTransIcon()}
+						</div>
 					</Grid>
-					<Grid item xs={2}>
-						<ListItemText
-							primary="Title"
-							secondary={transaction.Title}
-						/>
+					<Grid item xs>
+						<div className={classes.primText}>{transaction.Title}</div>
+						<div className={classes.secText}>
+							<Moment date={transaction.Timestamp * 1000} format="MMM D, YYYY · h:mm A" />
+						</div>
 					</Grid>
-					<Grid item xs={3}>
-						<ListItemText
-							primary="Date"
-							secondary={
-								<Moment
-									date={transaction.Timestamp * 1000}
-									format="LLLL"
-								/>
-							}
-						/>
-					</Grid>
-					<Grid item xs={2}>
-						<ListItemText
-							primary="Amount"
-							secondary={
-								<span className={classes.money}>
-									{CurrencyFormat.format(transaction.Amount)}
-								</span>
-							}
-						/>
-					</Grid>
-					<Grid item xs={4}>
-						<ListItemText
-							primary="Description"
-							secondary={transaction.Description}
-						/>
+					<Grid item style={{ textAlign: 'right' }}>
+						<div className={isNegative ? classes.amountNegative : classes.amountPositive}>
+						{isNegative ? '-' : '+'}{CurrencyFormat.format(Math.abs(transaction.Amount))}
+						</div>
+						<div className={classes.secText} style={{ textAlign: 'right' }}>
+							<span className={classes.type}>{transaction.Type}</span>
+						</div>
 					</Grid>
 				</Grid>
 			</ListItem>

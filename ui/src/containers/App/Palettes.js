@@ -1,9 +1,18 @@
+const TealPrimary = {
+	main: '#00c9b1',
+	light: '#4ddece',
+	dark: '#008c7c',
+	contrastText: '#0a0a0a',
+};
+
 export default (brand, theme) => {
 	switch (brand) {
 		case 'fleeca':
 			return Fleeca(theme);
 		case 'maze':
+			return Maze(theme);
 		case 'blaineco':
+			return BlaineCo(theme);
 		default:
 			return StandardPalette(theme);
 	}
@@ -12,18 +21,7 @@ export default (brand, theme) => {
 export const Fleeca = (theme) => {
 	return {
 		...StandardPalette(theme),
-		primary: {
-			main: '#25883d',
-			light: '#51c46d',
-			dark: '#124f21',
-			contrastText: theme === 'dark' ? '#ffffff' : '#26292d',
-		},
-		secondary: {
-			main: theme === 'dark' ? '#1e1e1e' : '#ffffff',
-			light: theme === 'dark' ? '#313131' : '#F5F6F4',
-			dark: theme === 'dark' ? '#151515' : '#EBEBEB',
-			contrastText: theme === 'dark' ? '#ffffff' : '#2e2e2e',
-		},
+		primary: TealPrimary,
 	};
 };
 
@@ -34,13 +32,7 @@ export const Maze = (theme) => {
 			main: '#ee222e',
 			light: '#f28f95',
 			dark: '#840008',
-			contrastText: theme === 'dark' ? '#ffffff' : '#26292d',
-		},
-		secondary: {
-			main: theme === 'dark' ? '#1e1e1e' : '#ffffff',
-			light: theme === 'dark' ? '#313131' : '#F5F6F4',
-			dark: theme === 'dark' ? '#151515' : '#EBEBEB',
-			contrastText: theme === 'dark' ? '#ffffff' : '#2e2e2e',
+			contrastText: '#ffffff',
 		},
 	};
 };
@@ -52,29 +44,18 @@ export const BlaineCo = (theme) => {
 			main: '#921b1f',
 			light: '#d45054',
 			dark: '#921b1f',
-			contrastText: theme === 'dark' ? '#ffffff' : '#26292d',
-		},
-		secondary: {
-			main: theme === 'dark' ? '#1e1e1e' : '#ffffff',
-			light: theme === 'dark' ? '#313131' : '#F5F6F4',
-			dark: theme === 'dark' ? '#151515' : '#EBEBEB',
-			contrastText: theme === 'dark' ? '#ffffff' : '#2e2e2e',
+			contrastText: '#ffffff',
 		},
 	};
 };
 
 export const StandardPalette = (theme) => {
 	return {
-		primary: {
-			main: '#de3333',
-			light: '#ff6060',
-			dark: '#941a1a',
-			contrastText: '#ffffff',
-		},
+		primary: TealPrimary,
 		secondary: {
-			main: '#13141f',
-			light: '#1b1c2c',
-			dark: '#11121b',
+			main: '#141414',
+			light: '#1c1c1c',
+			dark: '#0f0f0f',
 			contrastText: '#ffffff',
 		},
 		error: {
@@ -99,7 +80,7 @@ export const StandardPalette = (theme) => {
 		},
 		text: {
 			main: '#ffffff',
-			alt: '#A7A7A7',
+			alt: 'rgba(255, 255, 255, 0.7)',
 			info: '#919191',
 			light: '#ffffff',
 			dark: '#000000',

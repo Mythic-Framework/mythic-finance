@@ -12,7 +12,7 @@ import Loader from '../Loader';
 const useStyles = makeStyles((theme) => ({
 	btn: {
 		width: '95%',
-		fontSize: 12,
+		fontSize: 14,
 		marginTop: '5%',
 		color: theme.palette.text.main,
 		borderTopLeftRadius: 0,
@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	btnIcon: {
-		fontSize: 14,
-		marginRight: 5,
+		fontSize: 15,
+		marginRight: 6,
 		color: theme.palette.text.alt,
 	},
 	field: {
@@ -130,6 +130,7 @@ export default () => {
 					disabled={true}
 					label="Account Type"
 					defaultValue="personal_savings"
+					autoComplete="off"
 				>
 					{Types.map((option) => (
 						<MenuItem key={option.value} value={option.value}>
@@ -143,6 +144,7 @@ export default () => {
 					name="name"
 					className={classes.field}
 					label="Account Name"
+					autoComplete="off"
 				/>
 			</Modal>
 		</div>

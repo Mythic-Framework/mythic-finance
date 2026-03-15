@@ -1,70 +1,82 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@material-ui/core';
-import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
-import { Titlebar, AccountButton } from '../';
-import CreateAccountBtn from '../AccountButton/Create';
-import Nui from '../../util/Nui';
+import { AccountButton } from '../';
 import AccountPanel from './components/AccountPanel';
 
 const useStyles = makeStyles((theme) => ({
-	container: {
+	root: {
+		display: 'flex',
 		height: '100%',
 	},
-	wrapper: {
-		height: 'calc(100% - 125px)',
-	},
-	content: {
+	sidebar: {
+		width: 280,
+		flexShrink: 0,
 		height: '100%',
-		overflowY: 'auto',
-		overflowX: 'hidden',
-	},
-	maxHeight: {
-		height: '100%',
-	},
-	accountPanel: {
-		height: '100%',
-		overflowY: 'auto',
-		overflowX: 'hidden',
-	},
-	accountList: {
-		height: '100%',
-		overflowY: 'auto',
-		overflowX: 'hidden',
-		backgroundColor: theme.palette.secondary.main,
-		width: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+		background: theme.palette.secondary.main,
 		borderRight: `1px solid ${theme.palette.border.divider}`,
+		overflowY: 'auto',
+		overflowX: 'hidden',
+		'&::-webkit-scrollbar': { width: 3 },
+		'&::-webkit-scrollbar-thumb': {
+			background: `${theme.palette.primary.main}30`,
+			borderRadius: 2,
+		},
 	},
-	accountDetails: {
-		maxHeight: '100%',
+	sidebarSection: {
+		padding: '16px 12px 6px',
 	},
-	accHeader: {
-		width: '95%',
-		fontSize: 16,
-		marginTop: '5%',
-		color: theme.palette.text.alt,
-		borderBottom: `1px solid ${theme.palette.primary.main}`,
-		paddingLeft: 5,
-		display: 'block',
+	sectionLabel: {
+		fontSize: 10,
+		fontWeight: 700,
+		letterSpacing: '0.12em',
+		textTransform: 'uppercase',
+		color: theme.palette.primary.main,
+		opacity: 0.7,
+		paddingLeft: 4,
+		marginBottom: 4,
+		display: 'flex',
+		alignItems: 'center',
+		gap: 6,
+		'&::after': {
+			content: '""',
+			flex: 1,
+			height: 1,
+			background: `${theme.palette.primary.main}20`,
+		},
+	},
+	mainArea: {
+		flex: 1,
+		height: '100%',
+		overflowY: 'auto',
+		overflowX: 'hidden',
+		background: theme.palette.secondary.dark,
+		'&::-webkit-scrollbar': { width: 4 },
+		'&::-webkit-scrollbar-thumb': {
+			background: `${theme.palette.primary.main}30`,
+			borderRadius: 2,
+		},
 	},
 }));
 
 export default () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
-	const user = useSelector((state) => state.data.data.character);
 	const accounts = useSelector((state) => state.data.data.accounts);
 	const selected = useSelector((state) => state.bank.selected);
+
+	const [personal, setPersonal] = useState([]);
+	const [savings, setSavings] = useState([]);
+	const [organization, setOrganization] = useState([]);
 
 	useEffect(() => {
 		if (!Boolean(selected) && accounts.length > 0) {
 			dispatch({
 				type: 'SELECT_ACCOUNT',
-				payload: {
-					account: accounts[0]._id,
-				},
+				payload: { account: accounts[0]._id },
 			});
 		}
 	}, [accounts, selected]);
@@ -75,74 +87,50 @@ export default () => {
 			setSavings(accounts.filter((a) => a.Type == 'personal_savings'));
 			setOrganization(accounts.filter((a) => a.Type == 'organization'));
 		} else {
-			setPersonal(Array());
-			setSavings(Array());
-			setOrganization(Array());
+			setPersonal([]);
+			setSavings([]);
+			setOrganization([]);
 		}
 	}, [accounts]);
-
-	const [personal, setPersonal] = useState(Array());
-	const [savings, setSavings] = useState(Array());
-	const [organization, setOrganization] = useState(Array());
 
 	const onClick = (acc) => {
 		dispatch({
 			type: 'SELECT_ACCOUNT',
-			payload: {
-				account: acc,
-			},
+			payload: { account: acc },
 		});
 	};
 
 	return (
-		<Grid container className={classes.accountPanel}>
-			<Grid item xs={6} sm={4} className={classes.accountList}>
-				<div className={classes.accHeader}>Personal Accounts</div>
-				{personal.map((acc) => {
-					return (
-						<AccountButton
-							key={acc._id}
-							account={acc}
-							onSelected={onClick}
-						/>
-					);
-				})}
-
+		<div className={classes.root}>
+			<div className={classes.sidebar}>
+				{personal.length > 0 && (
+					<div className={classes.sidebarSection}>
+						<div className={classes.sectionLabel}>Personal</div>
+						{personal.map((acc) => (
+							<AccountButton key={acc._id} account={acc} onSelected={onClick} />
+						))}
+					</div>
+				)}
 				{savings.length > 0 && (
-					<>
-						<div className={classes.accHeader}>Saving Accounts</div>
-						{savings.map((acc) => {
-							return (
-								<AccountButton
-									key={acc._id}
-									account={acc}
-									onSelected={onClick}
-								/>
-							);
-						})}
-					</>
+					<div className={classes.sidebarSection}>
+						<div className={classes.sectionLabel}>Savings</div>
+						{savings.map((acc) => (
+							<AccountButton key={acc._id} account={acc} onSelected={onClick} />
+						))}
+					</div>
 				)}
-
 				{organization.length > 0 && (
-					<>
-						<div className={classes.accHeader}>
-							Organization Accounts
-						</div>
-						{organization.map((acc) => {
-							return (
-								<AccountButton
-									key={acc._id}
-									account={acc}
-									onSelected={onClick}
-								/>
-							);
-						})}
-					</>
+					<div className={classes.sidebarSection}>
+						<div className={classes.sectionLabel}>Organization</div>
+						{organization.map((acc) => (
+							<AccountButton key={acc._id} account={acc} onSelected={onClick} />
+						))}
+					</div>
 				)}
-			</Grid>
-			<Grid item xs={6} sm={8} className={classes.accountDetails}>
+			</div>
+			<div className={classes.mainArea}>
 				<AccountPanel />
-			</Grid>
-		</Grid>
+			</div>
+		</div>
 	);
 };

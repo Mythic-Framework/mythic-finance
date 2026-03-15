@@ -6,7 +6,7 @@ export const initialState = {
 	// DEV PREVIEW - uncomment to test in browser, revert before building
 	// hidden: false,
 	// brand: 'fleeca',
-	// app: 'BANK',
+	// app: 'ATM',
 };
 
 const appReducer = (state = initialState, action) => {

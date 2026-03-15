@@ -28,24 +28,14 @@ export const Fleeca = (theme) => {
 export const Maze = (theme) => {
 	return {
 		...StandardPalette(theme),
-		primary: {
-			main: '#ee222e',
-			light: '#f28f95',
-			dark: '#840008',
-			contrastText: '#ffffff',
-		},
+		primary: TealPrimary,
 	};
 };
 
 export const BlaineCo = (theme) => {
 	return {
 		...StandardPalette(theme),
-		primary: {
-			main: '#921b1f',
-			light: '#d45054',
-			dark: '#921b1f',
-			contrastText: '#ffffff',
-		},
+		primary: TealPrimary,
 	};
 };
 
@@ -53,15 +43,15 @@ export const StandardPalette = (theme) => {
 	return {
 		primary: TealPrimary,
 		secondary: {
-			main: '#141414',
-			light: '#1c1c1c',
-			dark: '#0f0f0f',
+			main: '#111518',
+			light: '#181d22',
+			dark: '#0c0e11',
 			contrastText: '#ffffff',
 		},
 		error: {
-			main: '#6e1616',
-			light: '#a13434',
-			dark: '#430b0b',
+			main: '#008c7c',
+			light: '#00c9b1',
+			dark: '#005a4f',
 		},
 		success: {
 			main: '#52984a',
@@ -80,7 +70,7 @@ export const StandardPalette = (theme) => {
 		},
 		text: {
 			main: '#ffffff',
-			alt: 'rgba(255, 255, 255, 0.7)',
+			alt: 'rgba(255, 255, 255, 0.55)',
 			info: '#919191',
 			light: '#ffffff',
 			dark: '#000000',
@@ -88,9 +78,9 @@ export const StandardPalette = (theme) => {
 		border: {
 			main: '#e0e0e008',
 			light: '#ffffff',
-			dark: '#26292d',
-			input: 'rgba(255, 255, 255, 0.23)',
-			divider: 'rgba(255, 255, 255, 0.12)',
+			dark: '#1e2328',
+			input: 'rgba(255, 255, 255, 0.12)',
+			divider: 'rgba(0, 201, 177, 0.1)',
 			item: 'rgb(255, 255, 255)',
 		},
 		mode: 'dark',

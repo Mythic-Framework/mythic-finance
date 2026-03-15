@@ -29,6 +29,11 @@ export default () => {
 		},
 		palette: palette,
 		components: {
+			MuiButtonBase: {
+				defaultProps: {
+					disableRipple: true,
+				},
+			},
 			MuiTooltip: {
 				styleOverrides: {
 					tooltip: {
@@ -49,8 +54,8 @@ export default () => {
 			MuiBackdrop: {
 				styleOverrides: {
 					root: {
-						height: app == 'ATM' ? 605 : 900,
-						width: app == 'ATM' ? '30%' : '75%',
+						height: app == 'ATM' ? 680 : 900,
+						width: app == 'ATM' ? '45%' : '75%',
 						margin: 'auto',
 					},
 				},
@@ -101,7 +106,7 @@ export default () => {
 					html: {
 						background:
 							process.env.NODE_ENV != 'production'
-								? '#1e1e1e'
+								? '#0c0e11'
 								: 'transparent',
 						'input::-webkit-outer-spin-button, input::-webkit-inner-spin-button':
 							{
@@ -118,8 +123,8 @@ export default () => {
 						left: 0,
 						right: 0,
 						margin: 'auto',
-						height: app == 'ATM' ? 605 : 900,
-						width: app == 'ATM' ? '30%' : '75%',
+						height: app == 'ATM' ? 680 : 900,
+						width: app == 'ATM' ? '45%' : '75%',
 						borderRadius: 10,
 						overflowY: 'auto',
 						overflowX: 'hidden',

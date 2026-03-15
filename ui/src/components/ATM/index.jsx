@@ -13,31 +13,40 @@ import Accounts from './Accounts';
 const useStyles = makeStyles((theme) => ({
 	container: {
 		height: '100%',
+		background: theme.palette.secondary.dark,
+		position: 'relative',
+		'&::before': {
+			content: '""',
+			position: 'absolute',
+			top: 0,
+			left: 0,
+			right: 0,
+			height: 2,
+			background: `linear-gradient(90deg, transparent, ${theme.palette.primary.main}, transparent)`,
+			zIndex: 10,
+		},
 	},
 	wrapper: {
-		height: 'calc(100% - 126px)',
+		height: 'calc(100% - 64px)',
+		position: 'relative',
 	},
 	content: {
 		height: '100%',
 		overflowY: 'auto',
 		overflowX: 'hidden',
+		'&::-webkit-scrollbar': {
+			width: 4,
+		},
+		'&::-webkit-scrollbar-track': {
+			background: 'transparent',
+		},
+		'&::-webkit-scrollbar-thumb': {
+			background: `${theme.palette.primary.main}40`,
+			borderRadius: 2,
+		},
 	},
 	maxHeight: {
 		height: '100%',
-		border: `1px solid ${theme.palette.border.divider}`,
-	},
-	accountPanel: {
-		height: '100%',
-		overflowY: 'auto',
-		overflowX: 'hidden',
-	},
-	accountList: {
-		height: '100%',
-		overflowY: 'auto',
-		overflowX: 'hidden',
-		backgroundColor: theme.palette.secondary.main,
-		width: '100%',
-		borderRight: `1px solid ${theme.palette.border.divider}`,
 	},
 }));
 

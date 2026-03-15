@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
 		right: 0,
 		left: 0,
 		margin: 'auto',
+		borderRadius: 10,
+		overflow: 'hidden',
+		border: `1px solid ${theme.palette.border.divider}`,
+		boxShadow: '0 0 0 1px rgba(0,0,0,0.4), 0 24px 64px rgba(0,0,0,0.6)',
 	},
 }));
 

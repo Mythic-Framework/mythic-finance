@@ -19,6 +19,7 @@ function RetrieveComponents()
 	Jobs = exports["mythic-base"]:FetchComponent("Jobs")
 	Vehicles = exports["mythic-base"]:FetchComponent("Vehicles")
 	Inventory = exports["mythic-base"]:FetchComponent("Inventory")
+	Version = exports["mythic-base"]:FetchComponent("Version")
 end
 
 AddEventHandler("Core:Shared:Ready", function()
@@ -42,6 +43,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		"Tasks",
 		"Vehicles",
 		"Inventory",
+		"Version",
 	}, function(error)
 		if #error > 0 then
 			exports["mythic-base"]:FetchComponent("Logger"):Critical("Finance", "Failed To Load All Dependencies")
@@ -50,5 +52,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		RetrieveComponents()
 
 		TriggerEvent('Finance:Server:Startup')
+
+		Version:Check('Mythic-Framework/Mythic-VersionCheckers', GetCurrentResourceName())
 	end)
 end)

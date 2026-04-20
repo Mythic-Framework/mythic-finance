@@ -44,7 +44,7 @@ AddEventHandler("Core:Shared:Ready", function()
 
 		RunBankingStartup()
 
-		PedInteraction:Add("paycheck", `ig_bankman`, vector3(253.193, 216.434, 105.282), 339.578, 25.0, {
+		PedInteraction:Add("paycheck-lombank-ped", `ig_bankman`, vector3(253.193, 216.434, 105.282), 339.578, 25.0, {
 			{
 				icon = "hand-holding-dollar",
 				text = "Get Paycheck",
@@ -55,7 +55,7 @@ AddEventHandler("Core:Shared:Ready", function()
 			},
 		}, "money-check-dollar")
 
-		Targeting.Zones:AddBox("paycheck-fuckingcunt", "money-check-dollar", vector3(254.53, 216.58, 106.28), 0.8, 3.6, {
+		Targeting.Zones:AddBox("paycheck-bigbank", "money-check-dollar", vector3(254.53, 216.58, 106.28), 0.8, 3.6, {
 			name = "paycheck",
 			heading = 340,
 			--debugPoly=true,
@@ -72,7 +72,7 @@ AddEventHandler("Core:Shared:Ready", function()
 			},
 		}, 3.0, true)
 
-		PedInteraction:Add("paycheck-2", `ig_bankman`, vector3(17.568, -927.223, 28.903), 111.958, 25.0, {
+		PedInteraction:Add("paycheck-lombank-ped", `ig_bankman`, vector3(17.568, -927.223, 28.903), 111.958, 25.0, {
 			{
 				icon = "hand-holding-dollar",
 				text = "Get Paycheck",
@@ -83,7 +83,7 @@ AddEventHandler("Core:Shared:Ready", function()
 			},
 		}, "money-check-dollar")
 
-		Targeting.Zones:AddBox("paycheck-fuckingcunt-2", "money-check-dollar", vector3(16.72, -927.74, 29.9), 2.0, 1.0, {
+		Targeting.Zones:AddBox("paycheck-lombank", "money-check-dollar", vector3(16.72, -927.74, 29.9), 2.0, 1.0, {
 			name = "paycheck",
 			heading = 15,
 			--debugPoly=true,
